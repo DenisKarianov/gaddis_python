@@ -1,0 +1,6 @@
+print ('Один', end=' ')
+print ('Два', end=' ')
+print ('Три')
+print ('Один', end='')
+print ('Два', end='')
+print ('Три')
