@@ -48,3 +48,17 @@ t_string = 'tree twelve travel test tasty'
 uppercase_t_string = t_string.replace('t', 'T')
 print(uppercase_t_string)
 
+# 8.8. algo: instruction that print first 3 symbols in string
+mystring = 'etewf3k'
+print(mystring[0:3])
+
+# 8.9. algo: instruction that print last 3 symbols in string
+mystring = 'etewf3k'
+print(mystring[-3:])
+
+# 8.10. algo: instruction that split string and print list
+mystring = 'pies>milk>meal>apple pie>icecream'
+str_list3 = mystring.split('>')
+print(str_list3)
+
+
