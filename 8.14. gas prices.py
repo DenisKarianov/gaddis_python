@@ -116,6 +116,7 @@ def month_average_price(in_list):
                 years_numbers.append(current_year)  # save year number
                 if date[0] == current_month:  # month the same
                     current_month_total += prices[loop_counter]
+                    month_counter += 1
                     # save data for last month
                     month_average_prices.append([current_month, current_month_total / month_counter])
                     # save data for year in final list
@@ -157,7 +158,22 @@ def month_average_price(in_list):
     # print data
     print()
     print("Month average prices")
-    print("Year\tJan\tFeb\tMar\tApr\tMay\tJun\tJul\tAug\tSep\tOct\tNov\tDec")
+    year = 'Year'
+    jan = 'Jan'
+    feb = 'Feb'
+    mar = 'Mar'
+    apr = 'Apr'
+    may = 'May'
+    jun = 'Jun'
+    jul = 'Jul'
+    aug = 'Aug'
+    sep = 'Sep'
+    oct = 'Oct'
+    nov = 'Nov'
+    dec = 'Dec'
+    print(
+        f"{year:^4}\t{jan:^5}\t{feb:^5}\t{mar:^5}\t{apr:^5}\t{may:^5}\t{jun:^5}\t{jul:^5}\t{aug:^5}\t{sep:^5}\t"
+        f"{oct:^5}\t{nov:^5}\t{dec:^5}")
     index = 0
     while index < len(all_av_prices):
         one_year_2dlist = all_av_prices[index]
@@ -166,7 +182,9 @@ def month_average_price(in_list):
         index2 = 0
         while index2 < len(range(12)):
             if index2 < len(one_year_2dlist):
-                month_print_list[one_year_2dlist[index2][0] - 1] = one_year_2dlist[index2][1]
+                month_print_list[int(one_year_2dlist[index2][0]) - 1] = round(float(one_year_2dlist[index2][1]), 4)
+                index2 += 1
+            else:
                 index2 += 1
         # change 0 to '---' so if no data for certain month it still prints in appropriate order
         index3 = 0
@@ -174,10 +192,13 @@ def month_average_price(in_list):
             if month_print_list[index3] == 0:
                 month_print_list[index3] = '---'
                 index3 += 1
-        print(f"{years_numbers[index]:^4}\t{month_print_list[0]}\t{month_print_list[1]}\t{month_print_list[2]}\t"
-              f"{month_print_list[3]}\t{month_print_list[4]}\t{month_print_list[5]}\t{month_print_list[6]}\t"
-              f"{month_print_list[7]}\t{month_print_list[8]}\t{month_print_list[9]}\t{month_print_list[10]}\t"
-              f"{month_print_list[11]}")
+            else:
+                index3 += 1
+        print(
+            f"{years_numbers[index]:^4}\t{month_print_list[0]:^5}\t{month_print_list[1]:^5}\t{month_print_list[2]:^5}\t"
+            f"{month_print_list[3]:^5}\t{month_print_list[4]:^5}\t{month_print_list[5]:^5}\t{month_print_list[6]:^5}\t"
+            f"{month_print_list[7]:^5}\t{month_print_list[8]:^5}\t{month_print_list[9]:^5}\t{month_print_list[10]:^5}\t"
+            f"{month_print_list[11]:^5}")
         index += 1
 
 
@@ -209,6 +230,21 @@ def get_dates_prices(in_list):
             else:
                 prices.append(float(data))
     return dates, prices
+
+
+def sort_prices(in_list):
+    dates, prices = get_dates_prices(in_list)
+    prices2 = [] + prices
+    min_sort = []
+    max_value = max(prices2)
+    index = 0
+    while index < len(prices2):
+        min_value = min(prices2)
+        if min_value <= max_value:
+
+        index += 1
+
+
 
 
 # Call the main function.
