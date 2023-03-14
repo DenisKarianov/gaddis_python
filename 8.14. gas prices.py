@@ -12,6 +12,7 @@ def main():
         infile.close()
         year_average_max_min_price(data_list)
         month_average_price(data_list)
+        sort_prices(data_list)
     except FileNotFoundError:
         print(f'No such file or directory: {FILE_NAME}.')
 
@@ -234,6 +235,7 @@ def get_dates_prices(in_list):
 
 def sort_prices(in_list):
     dates, prices = get_dates_prices(in_list)
+    # sort from min to max
     prices2 = [] + prices
     min_sort = []
     max_value = max(prices2)
@@ -241,8 +243,38 @@ def sort_prices(in_list):
     while index < len(prices2):
         min_value = min(prices2)
         if min_value <= max_value:
-
+            # copy date and min_value to sorted list
+            min_sort.append([get_string_date(dates[prices2.index(min(prices2))], '-'), min_value])
+            # remove min value to get next one
+            prices2[prices2.index(min(prices2))] = max(prices2) + 1
         index += 1
+    # save sorted data in txt file
+    min_sort_file = open('min_sort.txt', 'w')
+    for i in min_sort:
+        min_sort_file.write(f'{i[0]}:{i[1]}\n')
+    min_sort_file.close()
+    print()
+    print(f'List, sorted from min to max, saved to min_sort.txt.')
+    # sort from max to min
+    prices3 = [] + prices
+    max_sort = []
+    min_value = min(prices3)
+    index = 0
+    while index < len(prices3):
+        max_value = max(prices3)
+        if max_value >= min_value:
+            # copy date and min_value to sorted list
+            max_sort.append([get_string_date(dates[prices3.index(max(prices3))], '-'), max_value])
+            # remove max value to get next one
+            prices3[prices3.index(max(prices3))] = min(prices3) - 1
+        index += 1
+    # save sorted data in txt file
+    max_sort_file = open('max_sort.txt', 'w')
+    for i in max_sort:
+        max_sort_file.write(f'{i[0]}:{i[1]}\n')
+    max_sort_file.close()
+    print(f'List, sorted from max to min, saved to max_sort.txt.')
+
 
 
 
