@@ -10,8 +10,13 @@ FILE = 'countries.xlsx'
 infile = pd.ExcelFile(FILE)
 data = infile.parse(infile.sheet_names[0])
 # make dict - 'Country' column - key, 'Capital' column - value
-capital_countries = dict(zip(data.Country, data.Capital))
-
+capital_countries1 = dict(zip(data.Country, data.Capital))
+# make list of known countries
+infile2 = pd.ExcelFile('known_countries.xlsx')
+data2 = infile2.parse(infile2.sheet_names[0])
+countries2 = list(data2.Страна)
+# make shorted dict of countries and capitals
+capital_countries2 = {country: capital_countries1[country] for country in capital_countries1 if country in countries2}
 
 def main():
     players_quant = int(input("Введите количество участников: "))
@@ -19,11 +24,19 @@ def main():
     for i in range(players_quant):
         players_names.append(input(f"Введите имя участника № {i + 1}: "))
     quest_quant = int(input("Введите количество вопросов: "))
+    print("Выберите уровень сложности")
+    diff_level = int(input('Лёгкий уровень - введите "1", сложный уровень - введите "2": '))
     print("Викторина началась!")
-    quiz(players_quant, players_names, quest_quant)
+    if diff_level == 1:
+        quiz(players_quant, players_names, quest_quant, capital_countries2)
+    else:
+        quiz(players_quant, players_names, quest_quant, capital_countries1)
 
 
-def quiz(players_quant, players_names, quest_quant):
+
+def quiz(players_quant, players_names, quest_quant, dictionary):
+    # adapt dict name for program - define difficulty level
+    capital_countries = dictionary
     # make list of keys to get random questions
     countries_list = list(capital_countries)
     # make list for answers
@@ -74,9 +87,9 @@ def quiz(players_quant, players_names, quest_quant):
     print("------------------")
     # variables for table
     name = "Имя"
-    correct_quant = "Кол-во верн.ответов"
-    wrong_quant = "Кол-во неверн.ответов"
-    print(f"{name:^10}\t{correct_quant:^19}\t{wrong_quant:^21}")
+    correct_quant = "Верные ответы"
+    wrong_quant = "Неверные ответы"
+    print(f"{name:^10}\t{correct_quant:^10}\t{wrong_quant:^10}")
     # sort players for results and print
     count_results2 = [] + count_results
     min_value = min(count_results2)
@@ -90,16 +103,20 @@ def quiz(players_quant, players_names, quest_quant):
     # print wrong and correct answers for each player
     for p in range(players_quant):
         print(f"Разбираем ответы игрока {players_names[p]}")
-        # variables for table
-        country = "Страна"
-        play_answ = "Ответ участника"
-        correct_answ = "Верный ответ"
-        print(f"{country:^6}\t{play_answ:^15}\t{correct_answ:^12}")
-        for q in range(quest_quant):
-            # condition for wrong answer
-            if not all_results[p][q]:
-                print(f"{all_quest[p][q]:^6}\t{all_answers[p][q]:^15}\t{capital_countries[all_quest[p][q]]:^12}")
-            
+        # condition if all answers are correct
+        if all(all_results[p]):
+            print(f"Все ответы игрока {players_names[p]} верны.")
+        else:
+            # variables for table
+            country = "Страна"
+            play_answ = "Ответ участника"
+            correct_answ = "Верный ответ"
+            print(f"{country:^6}\t{play_answ:^15}\t{correct_answ:^12}")
+            for q in range(quest_quant):
+                # condition for wrong answer
+                if not all_results[p][q]:
+                    print(f"{all_quest[p][q]:^6}\t{all_answers[p][q]:^15}\t{capital_countries[all_quest[p][q]]:^12}")
+
 
 # Call the main function.
 if __name__ == '__main__':

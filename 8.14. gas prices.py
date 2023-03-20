@@ -276,9 +276,6 @@ def sort_prices(in_list):
     print(f'List, sorted from max to min, saved to max_sort.txt.')
 
 
-
-
-
 # Call the main function.
 if __name__ == '__main__':
     main()
