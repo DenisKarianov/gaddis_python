@@ -1,0 +1,537 @@
+a: 1 3 5 7 9 11 13 15 17 19 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49 51 53 55 57 59 61 63
+abdicated: 49
+abolish: 3 43 45
+abolishing: 3 43 45
+absolute: 3 43
+absolved: 63
+abuses: 3
+accommodation: 9
+accordingly: 3
+accustomed: 3
+acquiesce: 61
+act: 3 29 59 63
+acts: 3 29 63
+administration: 19
+affected: 27
+after: 15
+against: 49 55
+ages: 53 57
+all: 3 11 15 35 45 47 53 55 57 63
+allegiance: 63
+alliances: 63
+alone: 21
+already: 53
+alter: 3 45
+altering: 45
+america: 1 63
+among: 1 3 25 31 57
+amongst: 57
+amount: 21
+an: 1 3 5 7 9 11 13 15 17 21 23 25 27 29 33 39 41 43 45 47 49 51 53 55 57 59 61 63
+and: 1 3 5 7 9 11 15 17 21 23 25 27 29 43 45 47 49 51 53 55 57 61 63
+annihilation: 15
+another: 1
+answered: 59
+any: 3 33 39
+appealed: 61
+appealing: 63
+appropriations: 17
+arbitrary: 43
+are: 1 3 57 63
+armed: 31
+armies: 25 53
+arms: 23 55
+as: 1 3 5 7 9 11 13 15 17 19 21 23 25 27 29 39 41 43 47 49 51 55 57 61 63
+assembled: 63
+assent: 5 7 19 29
+assume: 1
+at: 1 3 7 9 11 13 15 17 19 23 25 29 33 43 47 49 53 59 61 63
+attempts: 61
+attend: 7
+attentions: 61
+authority: 63
+away: 45
+bands: 1
+barbarous: 53
+be: 1 3 7 15 39 41 53 55 59 61 63
+bear: 55
+become: 1 3 55
+becomes: 1 3
+been: 3 59 61
+begun: 53
+benefits: 39
+between: 63
+beyond: 41
+bodies: 11 31
+boundaries: 43
+brethren: 55 61
+bring: 57
+britain: 3 63
+british: 63
+brittish: 61
+burnt: 51
+but: 3
+by: 3 15 19 29 33 39 49 55 59 61 63
+called: 11
+candid: 3
+captive: 55
+cases: 39 47
+cause: 1 3 15
+causes: 1 3
+certain: 3
+changed: 3
+character: 59
+charters: 45
+circumstances: 53 61
+citizens: 55
+civil: 27 53
+civilized: 53
+coasts: 51
+colonies: 3 43 63
+combined: 29
+commerce: 63
+commit: 33
+common: 61
+compleat: 53
+compliance: 11
+conclude: 63
+conditions: 17 57
+congress: 63
+conjured: 61
+connected: 1
+connection: 61 63
+connections: 61
+consanguinity: 61
+consent: 3 25 37
+constitution: 29
+constrained: 55
+constrains: 3
+contract: 63
+convulsions: 15
+correspondence: 61
+country: 55
+course: 1
+created: 3
+creator: 3
+crown: 63
+cruelty: 53
+cutting: 35
+dangers: 15
+deaf: 61
+death: 53
+decent: 1
+declaration: 1 63
+declare: 1 63
+declaring: 47 49
+define: 59
+denounces: 61
+dependent: 21 27 63
+depository: 11
+depriving: 39
+deriving: 3
+design: 3
+desolation: 53
+despotism: 3
+destroyed: 51
+destruction: 57
+destructive: 3
+dictate: 3
+direct: 3
+disavow: 61
+disposed: 3
+dissolutions: 15
+dissolve: 1 13 63
+dissolved: 13 63
+distant: 11
+districts: 9
+divine: 63
+do: 3 57 63
+domestic: 57
+duty: 3
+each: 63
+earth: 1
+eat: 3 13 23 53 59 63
+effect: 3
+elected: 15
+emigration: 61
+encourage: 17
+endeavoured: 17 57
+endowed: 3
+ends: 3 55 61
+enemies: 61
+english: 43
+enlarging: 43
+entitle: 1
+equal: 1 3
+erected: 23
+establish: 3 19 43 63
+established: 3
+establishing: 19 43
+establishment: 3
+events: 1
+every: 59
+evils: 3
+evinces: 3
+example: 43
+excited: 57
+executioners: 55
+exercise: 15
+experience: 3
+exposed: 15
+extend: 61
+facts: 3
+fall: 55
+fatiguing: 11
+fellow: 55
+firm: 13 63
+firmness: 13
+fit: 39 43 59
+for: 1 3 5 7 9 11 13 15 17 19 21 29 31 33 35 37 39 41 43 45 47 53 59 61 63
+forbidden: 7
+foreign: 17 29 53
+foreigners: 17
+form: 3 9 45
+former: 3
+formidable: 9
+forms: 3 45
+fortunes: 63
+foundation: 3
+free: 43 59 63
+friends: 55 61
+from: 3 11 15 33 61 63
+frontiers: 57
+full: 63
+fundamentally: 45
+future: 3
+general: 63
+giving: 29
+god: 1
+good: 5 63
+governed: 3
+government: 3 43 45 49
+governments: 3 45
+governors: 7
+great: 3 63
+guards: 3
+hands: 55
+happiness: 3
+happinessthat: 
+harrass: 23
+has: 3 5 7 9 11 13 15 17 19 21 23 25 27 29 49 51 55 57
+hath: 3
+have: 1 15 59 61 63
+having: 3
+he: 1 3 5 7 9 11 13 15 17 19 21 23 25 27 29 33 35 39 43 45 47 49 51 53 55 57 59 61 63
+head: 53
+here: 15 43 49 61 63
+high: 55
+his: 3 5 7 11 13 19 21 29 49 53 63
+history: 3
+hither: 17 23
+hold: 3 61
+honor: 63
+houses: 13
+human: 1
+humble: 59
+immediate: 7
+impel: 1
+importance: 7
+imposing: 37
+in: 1 3 7 9 11 13 15 17 19 25 27 29 31 33 35 37 39 41 43 45 47 49 53 55 57 59 61 63
+incapable: 15
+indeed: 3
+independent: 27 63
+indian: 57
+inestimable: 9
+inevitably: 61
+inhabitants: 33 57
+injuries: 3
+injury: 59
+institute: 3
+instituted: 3
+instrument: 43
+insurrections: 57
+intentions: 63
+interrupt: 61
+into: 11 43
+introducing: 43
+invariably: 3
+invasion: 13 15
+invasions: 13
+invested: 47
+is: 1 3 5 7 9 11 13 15 17 19 21 25 29 33 43 45 47 49 53 57 59 61 63
+it: 1 3 11 13 15 17 23 25 27 29 33 35 37 39 43 47 53 55 57 59 61 63
+its: 3 39 43
+judge: 21 63
+judges: 21
+judiciary: 19
+jurisdiction: 29 61
+jury: 39 59
+just: 3 19 61
+justice: 19 61
+kept: 25
+kindred: 61
+king: 3 45
+known: 57
+lands: 17
+large: 9 15 31 53
+laws: 1 5 7 9 17 19 29 43 45
+laying: 3
+legislate: 47
+legislation: 29
+legislative: 11 15
+legislature: 9 25 47 61
+legislatures: 25 47
+let: 3
+levy: 63
+liberty: 3
+life: 3
+light: 3
+likely: 3
+lives: 51 63
+long: 3 15
+made: 21
+magnanimity: 61
+mankind: 1 3 61
+manly: 13
+many: 39
+marked: 59
+may: 59 63
+mean: 15
+measures: 11
+men: 3 21 33 43 45 49 61
+mercenaries: 53
+merciless: 57
+migrations: 17
+military: 27
+mock: 33
+more: 3
+most: 3 5 45 53 59
+multitude: 23
+murders: 33
+must: 61
+mutually: 63
+name: 63
+nation: 53
+native: 61
+naturalization: 17
+nature: 1
+natures: 
+necessary: 1 5
+necessity: 3 61
+neglected: 7
+neighbouring: 43
+new: 3 17 23
+nor: 7 61 63
+not: 1 3
+now: 3 29 57
+object: 3
+obstructed: 19
+obstructing: 17
+obtained: 7
+of: 1 3 7 9 11 13 15 17 19 21 23 25 27 29 31 33 35 39 41 43 45 49 51 53 55 57 59 61 63
+off: 3 21 23 35 41
+offences: 41
+officers: 23
+offices: 21 23
+on: 1 3 7 9 13 15 17 19 21 25 29 31 33 37 41 43 49 53 55 57 59 61 63
+once: 43
+one: 1 21 55 59
+only: 9 59
+operation: 7
+opinions: 1
+opposing: 13
+oppressions: 59
+or: 1 3 5 7 9 11 13 15 17 19 21 27 29 31 33 35 37 39 41 43 45 47 53 55 59 61 63
+organizing: 3
+other: 1 9 15 17 29 63
+others: 15 17 29
+ought: 63
+our: 1 17 23 25 29 35 37 43 45 47 51 55 57 59 61 63
+out: 15 23 25 37 49
+over: 3 7 43 45 49 61
+own: 47 51 57 63
+paralleled: 53
+parts: 35
+pass: 7 9 17
+patient: 3
+payment: 21
+peace: 25 61 63
+people: 1 3 9 13 15 23 51 59 63
+perfidy: 53
+petitioned: 59
+petitions: 59
+places: 11
+pledge: 63
+plundered: 51
+political: 1 63
+population: 17
+power: 1 3 15 19 27 47 63
+powers: 1 3 15 19
+present: 3 9 13 63
+pressing: 7
+pretended: 29 41
+prevent: 17
+prince: 59
+principles: 3
+protecting: 33
+protection: 49 63
+prove: 3
+provide: 3 63
+providence: 63
+province: 43
+prudence: 3
+public: 5 11
+publish: 63
+punishment: 33
+purpose: 11 17
+pursuing: 3
+pursuit: 3
+quartering: 31
+raising: 17
+ravaged: 51
+records: 11
+rectitude: 63
+redress: 59
+reduce: 3
+refused: 5 9 15
+refusing: 17 19
+reliance: 63
+relinquish: 9
+remaining: 15
+reminded: 61
+render: 27 43
+repeated: 3 13 59
+repeatedly: 13
+representation: 9
+representative: 13 63
+representatives: 63
+requires: 1
+respect: 1
+rest: 61
+returned: 15
+right: 3 9 13 63
+rights: 3 13
+rule: 43 57 59
+ruler: 59
+sacred: 63
+safety: 3
+salaries: 21
+same: 3 43
+savages: 57
+scarcely: 53
+seas: 41 51 55
+secure: 3
+securitysuch: 
+seem: 3
+selfevident: 
+sent: 3 5 7 9 13 19 23 25 29 37 63
+separate: 1
+separation: 1 61
+settlement: 61
+sexes: 57
+shall: 3
+shewn: 3
+should: 1 3 7 33
+so: 1 3 5 7 11 13 15 43 47 53 63
+sole: 11 63
+solemnly: 63
+stage: 59
+standing: 25
+state: 1 3 15 17 33 63
+states: 1 3 17 33 63
+station: 1
+subject: 29
+submitted: 3
+substance: 23
+such: 3 15
+suffer: 3
+sufferable: 3
+sufferance: 3
+superior: 27
+support: 63
+supreme: 63
+suspended: 7
+suspending: 47
+swarms: 23
+system: 3 43
+systems: 3
+taken: 55
+taking: 45
+taxes: 37
+tenure: 21
+terms: 59
+than: 3
+that: 1 3 17 63
+the: 1 3 5 7 9 11 13 15 17 19 21 23 25 27 29 33 35 39 43 45 47 51 53 55 57 59 61 63
+their: 3 7 11 15 17 21 23 29 55 61
+them: 1 3 7 9 11 33 47 55 61 63
+themselves: 3 47 55
+therefore: 61 63
+therein: 43
+these: 3 17 33 43 59 61 63
+they: 1 3 33 61 63
+things: 63
+thirteen: 1
+this: 3 53 63
+those: 9
+throw: 3
+thus: 59
+ties: 61
+till: 7
+time: 15 25 53 61
+times: 25
+to: 1 3 5 7 9 11 15 17 19 23 27 29 41 43 47 51 53 55 57 59 61 63
+together: 11
+too: 61
+totally: 53 63
+towns: 51
+trade: 35
+train: 3 55
+transient: 3
+transporting: 41 53
+trial: 33 39
+tried: 41
+troops: 31
+truths: 3
+tyranny: 3 53
+tyrant: 9 59
+tyrants: 9
+unacknowledged: 29
+unalienable: 3
+unanimous: 1
+uncomfortable: 11
+under: 3 51
+undistinguished: 57
+unfit: 59
+united: 1 63
+unless: 7 9
+unusual: 11
+unwarrantable: 61
+unworthy: 53
+us: 1 3 5 7 9 11 13 15 17 19 25 29 31 37 39 41 47 49 53 57 59 61
+usurpations: 3 61
+utterly: 7
+valuable: 45
+voice: 61
+waging: 49
+wanting: 61
+war: 23 49 57 61 63
+warfare: 57
+warned: 61
+we: 1 3 15 19 27 47 59 61 63
+whatsoever: 47
+when: 1 3 7
+whenever: 3
+whereby: 15
+which: 1 3 33 59 61 63
+while: 3
+wholesome: 5
+whose: 57 59
+will: 3 21
+with: 1 3 11 13 15 25 29 35 37 47 53 63
+within: 15
+without: 15 25 37
+works: 53
+world: 3 35 63
+would: 9 61
