@@ -1,2 +1,4 @@
 __pycache__/
 expenses.txt
+.idea/gaddis_python.iml
+.idea/misc.xml
