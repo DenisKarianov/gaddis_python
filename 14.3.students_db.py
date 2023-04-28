@@ -28,18 +28,49 @@ def main():
         choice = get_menu_choice(MAIN_MIN_CHOICE, MAIN_MAX_CHOICE)
         if choice == MAIN_MAJORS:
             choice = 0
-            display_menu("Majors")
-            choice = get_menu_choice(MIN_CHOICE, MAX_CHOICE)
             while choice != EXIT:
+                display_menu("Majors")
+                choice = get_menu_choice(MIN_CHOICE, MAX_CHOICE)
                 if choice == ADD:
                     add(0)
                 elif choice == FIND:
-                    find()
-
-        elif choice == CHANGE:
-            change()
-        elif choice == DELETE:
-            delete()
+                    find(0)
+                elif choice == CHANGE:
+                    change(0)
+                elif choice == DELETE:
+                    delete(0)
+                elif choice == SHOW_ALL:
+                    show_all(0)
+        elif choice == MAIN_DEPS:
+            choice = 0
+            while choice != EXIT:
+                display_menu("Departments")
+                choice = get_menu_choice(MIN_CHOICE, MAX_CHOICE)
+                if choice == ADD:
+                    add(1)
+                elif choice == FIND:
+                    find(1)
+                elif choice == CHANGE:
+                    change(1)
+                elif choice == DELETE:
+                    delete(1)
+                elif choice == SHOW_ALL:
+                    show_all(1)
+        elif choice == MAIN_STUDENTS:
+            choice = 0
+            while choice != EXIT:
+                display_menu("Students")
+                choice = get_menu_choice(MIN_CHOICE, MAX_CHOICE)
+                if choice == ADD:
+                    add(2)
+                elif choice == FIND:
+                    find(2)
+                elif choice == CHANGE:
+                    change(2)
+                elif choice == DELETE:
+                    delete(2)
+                elif choice == SHOW_ALL:
+                    show_all(2)
 
 
 def create_db():
@@ -136,27 +167,40 @@ def add(mode):
             conn.close()
 
 
-def find():
+# mode: 0 Majors, 1 Departments, 2 Students
+def find(mode):
     conn = None
     try:
         conn = sqlite3.connect(DB)
         cur = conn.cursor()
-        # check quantity of columns in table to
-        search = input("Enter a name or phone number to find: ")
-        search = '%' + search.lower() + '%'
-        cur.execute('''SELECT Name, Phone FROM Entries WHERE lower(Name) LIKE ? OR
-                    lower(Phone) LIKE ?''', (search, search))
-        result = cur.fetchall()
-        if len(result) > 0:
-            # variables to print header
-            n = 'Name'
-            ph = 'Phone'
-            print(f"{n:<10} {ph:<12}")
-            print("----------------------")
-            for entry in result:
-                print(f"{entry[0]:<10} {entry[1]:<12}")
-        else:
-            print("Entry not found.")
+        if mode == 0:  # Majors
+            search = input("Enter a name to find: ")
+            search = '%' + search.lower() + '%'
+            cur.execute('''SELECT RowID, Name FROM Majors WHERE lower(Name) LIKE ?''', (search,))
+            result = cur.fetchall()
+            if len(result) > 0:
+                display_entry(result, 0, cur)
+            else:
+                print("Entry not found.")
+        elif mode == 1:  # Departments
+            search = input("Enter a name to find: ")
+            search = '%' + search.lower() + '%'
+            cur.execute('''SELECT RowID, Name FROM Departments WHERE lower(Name) LIKE ?''', (search,))
+            result = cur.fetchall()
+            if len(result) > 0:
+                display_entry(result, 0, cur)
+            else:
+                print("Entry not found.")
+        elif mode == 2:  # Students
+            search = input("Enter a name to find: ")
+            search = '%' + search.lower() + '%'
+            cur.execute('''SELECT StudentID, Name, MajorID, DeptID FROM Students WHERE lower(Name) LIKE ?''',
+                        (search,))
+            result = cur.fetchall()
+            if len(result) > 0:
+                display_entry(result, 1, cur)
+            else:
+                print("Entry not found.")
     except sqlite3.Error as err:
         print(err)
     finally:
@@ -164,50 +208,106 @@ def find():
             conn.close()
 
 
-def change():
+# mode: 0 Majors, 1 Departments, 2 Students
+def change(mode):
     conn = None
     try:
         conn = sqlite3.connect(DB)
         cur = conn.cursor()
-        search = input("Enter a name or phone number to change: ")
-        search = '%' + search.lower() + '%'
-        cur.execute('''SELECT RowID, Name, Phone FROM Entries WHERE lower(Name) LIKE ? or lower(Phone) LIKE ?''',
-                    (search, search))
-        result = cur.fetchall()
-        if len(result) > 0:
-            display_entry(result)
-        if len(result) == 1:
-            update_entry(cur, search)
-            conn.commit()
-        elif len(result) > 1:  # if there were more than one entry found
-            loop_flag = 0
-            while loop_flag < 2:
-                id = input("Enter entry's RowID that need to be change: ")
-                if id.isdigit():
-                    id = int(id)
-                    loop_flag += 1
-                    # check if entered RowID is in table
-                    cur.execute('''SELECT RowID FROM Entries WHERE RowID == ?''', (id,))
-                    result_id = cur.fetchall()
-                    if len(result_id) == 1:  # found one RowID, that user has entered
+        cur.execute('PRAGMA foreign_keys=ON')  # turn on foreign keys support
+        if mode == 0:  # Majors
+            search = input("Enter major's name to change: ")
+            search = '%' + search.lower() + '%'
+            cur.execute('''SELECT MajorID, Name FROM Majors WHERE lower(Name) LIKE ?''', (search,))
+            result = cur.fetchall()
+            if len(result) > 0:
+                display_entry(result, 0, cur)
+            if len(result) == 1:
+                id_update = result[0][0]
+                update_entry(cur, id_update, 0)
+                conn.commit()
+            elif len(result) > 1:  # if there were more than one entry found
+                loop_flag = 0
+                while loop_flag < 2:
+                    id_update = input("Enter MajorID that need to be change: ")
+                    if id_update.isdigit():
+                        id_update = int(id_update)
                         loop_flag += 1
-                        name = input("Enter new name or just press 'Enter' to save previous name: ")
-                        phone = input("Enter new phone number or just press 'Enter' to save previous phone number: ")
-                        if len(name) > 1:
-                            cur.execute('''UPDATE Entries SET Name = ?
-                                       WHERE RowID == ?''', (name, id))
-                            print(f"{name} was added.")
-                        if len(phone) > 1:
-                            cur.execute('''UPDATE Entries SET Phone = ?
-                                       WHERE RowID == ?''', (phone, id))
-                            print(f"{phone} was added.")
-                        conn.commit()
+                        # check if entered RowID is in table
+                        cur.execute('''SELECT MajorID FROM Majors WHERE MajorID == ?''', (id_update,))
+                        result_id = cur.fetchall()
+                        if len(result_id) == 1:  # found one RowID, that user has entered
+                            loop_flag += 1
+                            update_entry(cur, id_update, 0)
+                            conn.commit()
+                        else:
+                            print("Wrong MajorID.")
                     else:
-                        print("Wrong RowID.")
-                else:
-                    print("RowID should be a integer.")
-        else:
-            print("Entry was not found.")
+                        print("MajorID should be integer.")
+            else:
+                print("Entry was not found.")
+        elif mode == 1:  # Departments
+            search = input("Enter department's name to change: ")
+            search = '%' + search.lower() + '%'
+            cur.execute('''SELECT DeptID, Name FROM Departments WHERE lower(Name) LIKE ?''', (search,))
+            result = cur.fetchall()
+            if len(result) > 0:
+                display_entry(result, 0, cur)
+            if len(result) == 1:
+                id_update = result[0][0]
+                update_entry(cur, id_update, 1)
+                conn.commit()
+            elif len(result) > 1:  # if there were more than one entry found
+                loop_flag = 0
+                while loop_flag < 2:
+                    id_update = input("Enter DeptID that need to be change: ")
+                    if id_update.isdigit():
+                        id_update = int(id_update)
+                        loop_flag += 1
+                        # check if entered RowID is in table
+                        cur.execute('''SELECT DeptID FROM Departments WHERE DeptID == ?''', (id_update,))
+                        result_id = cur.fetchall()
+                        if len(result_id) == 1:  # found one RowID, that user has entered
+                            loop_flag += 1
+                            update_entry(cur, id_update, 1)
+                            conn.commit()
+                        else:
+                            print("Wrong DeptID.")
+                    else:
+                        print("DeptID should be integer.")
+            else:
+                print("Entry was not found.")
+        elif mode == 2:  # Students
+            search = input("Enter student's name to change: ")
+            search = '%' + search.lower() + '%'
+            cur.execute('''SELECT StudentID, Name, MajorID, DeptID FROM Students WHERE lower(Name) LIKE ?''', (search,))
+            result = cur.fetchall()
+            if len(result) > 0:
+                display_entry(result, 1, cur)
+            if len(result) == 1:
+                id_update = result[0][0]
+                update_entry(cur, id_update, 2)
+                conn.commit()
+            elif len(result) > 1:  # if there were more than one entry found
+                loop_flag = 0
+                while loop_flag < 2:
+                    id_update = input("Enter StudentID that need to be change: ")
+                    if id_update.isdigit():
+                        id_update = int(id_update)
+                        loop_flag += 1
+                        # check if entered RowID is in table
+                        cur.execute('''SELECT StudentID FROM Students WHERE StudentID == ?''', (id_update,))
+                        result_id = cur.fetchall()
+                        if len(result_id) == 1:  # found one RowID, that user has entered
+                            loop_flag += 1
+                            update_entry(cur, id_update, 2)
+                            conn.commit()
+                        else:
+                            print("Wrong StudentID.")
+                    else:
+                        print("StudentID should be integer.")
+            else:
+                print("Entry was not found.")
     except sqlite3.Error as err:
         print(err)
     finally:
@@ -215,39 +315,109 @@ def change():
             conn.close()
 
 
-def delete():
+# mode: 0 Majors, 1 Departments, 2 Students
+def delete(mode):
     conn = None
     try:
         conn = sqlite3.connect(DB)
         cur = conn.cursor()
-        search = input("Enter a name or phone number to delete: ")
-        search = '%' + search.lower() + '%'
-        cur.execute('''SELECT RowID, Name, Phone FROM Entries WHERE lower(Name) LIKE ? or lower(Phone) LIKE ?''',
-                    (search, search))
-        result = cur.fetchall()
-        if len(result) > 0:
-            display_entry(result)
-            loop_flag = 0
-            while loop_flag < 2:
-                id = input("Enter entry's RowID to delete: ")
-                if id.isdigit():
-                    id = int(id)
-                    loop_flag += 1
-                    # check if entered RowID is in table
-                    cur.execute('''SELECT RowID FROM Entries WHERE RowID == ?''', (id,))
-                    result_id = cur.fetchall()
-                    if len(result_id) == 1:  # found one RowID, that user has entered
+        cur.execute('PRAGMA foreign_keys=ON')  # turn on foreign keys support
+        if mode == 0:  # Majors
+            search = input("Enter major's name to delete: ")
+            search = '%' + search.lower() + '%'
+            cur.execute('''SELECT MajorID, Name FROM Majors WHERE lower(Name) LIKE ?''', (search,))
+            result = cur.fetchall()
+            if len(result) > 0:
+                display_entry(result, 0, cur)
+            if len(result) == 1:
+                id_delete = result[0][0]
+                delete_entry(cur, id_delete, 0)
+                conn.commit()
+            elif len(result) > 1:  # if there were more than one entry found
+                loop_flag = 0
+                while loop_flag < 2:
+                    id_delete = input("Enter MajorID that need to be deleted: ")
+                    if id_delete.isdigit():
+                        id_delete = int(id_delete)
                         loop_flag += 1
-                        cur.execute('''DELETE FROM Entries WHERE RowID == ?''', (id,))
-                        print("Entry was deleted.")
-                        conn.commit()
+                        # check if entered RowID is in table
+                        cur.execute('''SELECT MajorID FROM Majors WHERE MajorID == ?''', (id_delete,))
+                        result_id = cur.fetchall()
+                        if len(result_id) == 1:  # found one RowID, that user has entered
+                            loop_flag += 1
+                            delete_entry(cur, id_delete, 0)
+                            conn.commit()
+                        else:
+                            print("Wrong MajorID.")
                     else:
-                        print("Wrong RowID.")
-                else:
-                    print("RowID should be a integer.")
-            conn.commit()
-        else:
-            print("Entry was not found.")
+                        print("MajorID should be integer.")
+            else:
+                print("Entry was not found.")
+
+        elif mode == 1:  # Departments
+            search = input("Enter department's name to delete: ")
+            search = '%' + search.lower() + '%'
+            cur.execute('''SELECT DeptID, Name FROM Departments WHERE lower(Name) LIKE ?''', (search,))
+            result = cur.fetchall()
+            if len(result) > 0:
+                display_entry(result, 0, cur)
+            if len(result) == 1:
+                id_delete = result[0][0]
+                delete_entry(cur, id_delete, 1)
+                conn.commit()
+            elif len(result) > 1:  # if there were more than one entry found
+                loop_flag = 0
+                while loop_flag < 2:
+                    id_delete = input("Enter DeptID that need to be deleted: ")
+                    if id_delete.isdigit():
+                        id_delete = int(id_delete)
+                        loop_flag += 1
+                        # check if entered RowID is in table
+                        cur.execute('''SELECT DeptID FROM Departments WHERE DeptID == ?''', (id_delete,))
+                        result_id = cur.fetchall()
+                        if len(result_id) == 1:  # found one RowID, that user has entered
+                            loop_flag += 1
+                            delete_entry(cur, id_delete, 1)
+                            conn.commit()
+                        else:
+                            print("Wrong DeptID.")
+                    else:
+                        print("DeptID should be integer.")
+            else:
+                print("Entry was not found.")
+
+        elif mode == 2:  # Students
+            search = input("Enter student's name to delete: ")
+            search = '%' + search.lower() + '%'
+            cur.execute('''SELECT StudentID, Name, MajorID, DeptID FROM Students WHERE lower(Name) LIKE ?''', (search,))
+            result = cur.fetchall()
+            if len(result) > 0:
+                display_entry(result, 1, cur)
+            if len(result) == 1:
+                id_delete = result[0][0]
+                delete_entry(cur, id_delete, 2)
+                conn.commit()
+            elif len(result) > 1:  # if there were more than one entry found
+                loop_flag = 0
+                while loop_flag < 2:
+                    id_delete = input("Enter StudentID that need to be deleted: ")
+                    if id_delete.isdigit():
+                        id_delete = int(id_delete)
+                        loop_flag += 1
+                        # check if entered RowID is in table
+                        cur.execute('''SELECT StudentID FROM Students WHERE StudentID == ?''', (id_delete,))
+                        result_id = cur.fetchall()
+                        if len(result_id) == 1:  # found one RowID, that user has entered
+                            loop_flag += 1
+                            delete_entry(cur, id_delete, 2)
+                            conn.commit()
+                        else:
+                            print("Wrong StudentID.")
+                    else:
+                        print("StudentID should be integer.")
+            else:
+                print("Entry was not found.")
+
     except sqlite3.Error as err:
         print(err)
     finally:
@@ -255,29 +425,132 @@ def delete():
             conn.close()
 
 
-def display_entry(result):
-    # variables to print header
-    id = 'RowID'
-    n = 'Name'
-    ph = 'Phone'
-    print(f"{id:<5} {n:<10} {ph:<12}")
-    print("----------------------")
-    for entry in result:
-        print(f"{entry[0]:<5} {entry[1]:<10} {entry[2]:<12}")
+# mode: 0 for Majors, Departments, 1 for Students
+def show_all(mode):
+    conn = None
+    try:
+        conn = sqlite3.connect(DB)
+        cur = conn.cursor()
+        if mode == 0:  # Majors
+            cur.execute('''SELECT MajorID, Name FROM Majors''')
+            result = cur.fetchall()
+            display_entry(result, 0, cur)
+        elif mode == 1:  # Departments
+            cur.execute('''SELECT DeptID, Name FROM Departments''')
+            result = cur.fetchall()
+            display_entry(result, 0, cur)
+        elif mode == 2:  # Students
+            cur.execute('''SELECT StudentID, Name, MajorID, DeptID FROM Students''')
+            result = cur.fetchall()
+            display_entry(result, 1, cur)
+    except sqlite3.Error as err:
+        print(err)
+    finally:
+        if conn is not None:
+            conn.close()
 
 
-def update_entry(cur, search):
-    name = input("Enter new name or just press 'Enter' to save previous name: ")
-    phone = input("Enter new phone number or just press 'Enter' to save previous phone number: ")
-    search = '%' + search.lower() + '%'
-    if len(name) > 1:
-        cur.execute('''UPDATE Entries SET Name = ?
-                   WHERE lower(Name) LIKE ? or lower(Phone) LIKE ?''', (name, search, search))
-        print(f"{name} was added.")
-    if len(phone) > 1:
-        cur.execute('''UPDATE Entries SET Phone = ?
-                   WHERE lower(Name) LIKE ? or lower(Phone) LIKE ?''', (phone, search, search))
-        print(f"{phone} was added.")
+# mode: 0 for Majors, Departments, 1 for Students
+def display_entry(result, mode, cur):
+    if mode == 0:  # Majors, Departments
+        # variables to print header
+        id = 'ID'
+        n = 'Name'
+        print(f"{id:<3} {n:<12}")
+        print("----------------------")
+        for entry in result:
+            print(f"{entry[0]:<3} {entry[1]:<12}")
+    if mode == 1:  # Students
+        # variables to print header
+        id = 'ID'
+        n = 'Name'
+        maj_header = 'Major'
+        dep_header = 'Department'
+        print(f"{id:<3} {n:<12} {maj_header:<12} {dep_header:<12}")
+        print("--------------------------------------------------")
+        for entry in result:
+            # get major's name from Majors table
+            cur.execute('''SELECT Name FROM Majors WHERE MajorID == ?''', (entry[2],))
+            major = cur.fetchone()[0]
+            # get department's name from Departments table
+            cur.execute('''SELECT Name FROM Departments WHERE DeptID == ?''', (entry[3],))
+            dept = cur.fetchone()[0]
+            print(f"{entry[0]:<3} {entry[1]:<12} {major:<12} {dept:<12}")
+
+
+# mode: 0 for Majors, 1 for Departments, 2 for Students
+def update_entry(cur, id_update, mode):
+    if mode == 0:  # Majors
+        name = input("Enter new major's name or just press 'Enter' to save previous: ")
+        if len(name) > 1:  # if name was entered
+            cur.execute('''UPDATE Majors SET Name = ? WHERE MajorID == ?''', (name, id_update))
+            print(f"{name} was added.")
+        else:
+            print("Major was not changed.")
+    elif mode == 1:  # Departments
+        name = input("Enter new department's name or just press 'Enter' to save previous: ")
+        if len(name) > 1:  # if name was entered
+            cur.execute('''UPDATE Departments SET Name = ? WHERE DeptID == ?''', (name, id_update))
+            print(f"{name} was added.")
+        else:
+            print("Department was not changed.")
+    elif mode == 2:  # Students
+        name = input("Enter new student's name or just press 'Enter' to save previous: ")
+        cur.execute('''SELECT MajorID, Name FROM Majors''')
+        result = cur.fetchall()
+        print("--- Majors ---")
+        display_entry(result, 0, cur)
+        # validation loop for integer MajorID
+        loop_flag = True
+        while loop_flag:
+            majorid = input("Enter MajorID for student from above: ")
+            if majorid.isdigit():
+                majorid = int(majorid)
+                loop_flag = False
+        cur.execute('''SELECT DeptID, Name FROM Departments''')
+        result = cur.fetchall()
+        print("--- Departments ---")
+        display_entry(result, 0, cur)
+        # validation loop for integer DeptID
+        loop_flag = True
+        while loop_flag:
+            deptid = input("Enter DeptID for student from above: ")
+            if deptid.isdigit():
+                deptid = int(deptid)
+                loop_flag = False
+        if len(name) > 1:  # if name was entered
+            try:
+                cur.execute('''UPDATE Students SET Name = ?, MajorID = ?, DeptID = ? WHERE StudentID == ?''',
+                            (name, majorid, deptid, id_update))
+                print(f"{name} was added.")
+            except sqlite3.Error as err:
+                print(err)
+        else:
+            print(f"Entry was not changed.")
+
+
+# mode: 0 for Majors, 1 for Departments, 2 for Students
+def delete_entry(cur, id_delete, mode):
+    if mode == 0:  # Majors
+        try:
+            cur.execute('''DELETE FROM Majors WHERE MajorID == ?''', (id_delete,))
+            print("Entry was deleted.")
+        except sqlite3.Error as err:
+            print(err)
+
+    elif mode == 1:  # Departments
+        try:
+            cur.execute('''DELETE FROM Departments WHERE DeptID == ?''', (id_delete,))
+            print("Entry was deleted.")
+        except sqlite3.Error as err:
+            print(err)
+
+    elif mode == 2:  # Students
+        try:
+            cur.execute('''DELETE FROM Students WHERE StudentID == ?''', (id_delete,))
+            print("Entry was deleted.")
+        except sqlite3.Error as err:
+            print(err)
 
 
 if __name__ == '__main__':
